@@ -1,0 +1,2 @@
+# This is necessary because the Talos setup is broken
+scipy>=1.7.0
