@@ -119,14 +119,14 @@ introduced in [this
 paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5336047/pdf/sensors-17-00425.pdf).
 
 ### Structure
-In this work we consider three different variations of CNNs and one Dense Neural Network (DNN). The
+In this work we consider three different variations of CNNs and one Feed Forward Neural Network (FFNN). The
 variants and the abbreviations used in the following are:
 - one layer CNN with wide kernel layer (CNN)
 - two layer CNN with a wide kernel first layer and a small kernel [depth-wise
   separable](https://towardsdatascience.com/a-basic-introduction-to-separable-convolutions-b99ec3102728)
   layer (DS-CNN)
 - three layer CNN with a wide kernel first layer and two small kernel layers (WDCNN)
-- two layer DNN with two layers (DNN)
+- two layer FFNN with two dense layers (FFNN)
 
 Every network uses a dense layer in the end with a softmax classifier and contains a batch
 normalization before every convolutional or dense layer. After every convolutional layer, a max
@@ -146,8 +146,8 @@ The hyperparameters listed in this section include the following:
 - kernel stride: stride of the first convolutional layer's kernels
 - number of filters: the number of filters for each convolutional layer, given as a tuple `(layer1,
   layer2, ...)`
-- first layer: size of the first dense layer of the DNN
-- second layer: size of the second dense layer of the DNN
+- first layer: size of the first dense layer of the FFNN
+- second layer: size of the second dense layer of the FFNN
 
 Each convolutional layer following the first has a kernel size of `(3, 1)` and a stride of `(1, 1)`.
 
@@ -160,7 +160,7 @@ hyperparameters for the best performing networks are given in the table below:
 | CNN               | (64, 1)     | (8, 1)        | (32)              | -           | -            |
 | DS-CNN            | (32, 1)     | (16, 1)       | (8, 16)           | -           | -            |
 | WDCNN             | (32, 1)     | (8, 1)        | (8, 16, 32)       | -           | -            |
-| DNN               | -           | -             | -                 | 16          | 0            |
+| FFNN              | -           | -             | -                 | 16          | 0            |
 
 The models using the **CWRU dataset** receive an input with the shape `(512, 1, 1)`, since the
 dataset only provides one channel. The hyperparameters are listed below:
@@ -170,7 +170,7 @@ dataset only provides one channel. The hyperparameters are listed below:
 | CNN            | (64, 1)     | (16, 1)       | (40)              | -           | -            |
 | DS-CNN         | (128, 1)    | (32, 1)       | (20, 40)          | -           | -            |
 | WDCNN          | (32, 1)     | (8, 1)        | (8, 16, 32)       | -           | -            |
-| DNN            | -           | -             | -                 | 16          | 32           |
+| FFNN           | -           | -             | -                 | 16          | 32           |
 
 With the **Paderborn dataset** an input shape of `(1024, 1, 1)` was used. The hyperparameters are as
 follows:
@@ -180,7 +180,7 @@ follows:
 | CNN                 | (128, 1)    | (32, 1)       | (48)              | -           | -            |
 | DS-CNN              | (128, 1)    | (32, 1)       | (20, 40)          | -           | -            |
 | WDCNN               | (64, 1)     | (16, 1)       | (8, 16, 32)       | -           | -            |
-| DNN                 | -           | -             | -                 | 8           | 16           |
+| FFNN                | -           | -             | -                 | 8           | 16           |
 
 ## Detailed results
 The results shown below use the following metrics:
@@ -196,7 +196,7 @@ The results shown below use the following metrics:
 | CNN     | 100          | 100                    | 6188       | 11056          | 269348 |
 | DS-CNN  | 99.97        | 99.93                  | 988        | 8400           | 21076  |
 | WDCNN   | 100          | 100                    | 3108       | 12256          | 73908  |
-| DNN     | 83.28        | 83.59                  | 8348       | 12320          | 17716  |
+| FFNN    | 83.28        | 83.59                  | 8348       | 12320          | 17716  |
 
 **CWRU**
 | Network | accuracy (%) | converted accuracy (%) | parameters | model size (B) | FLOPs  |
@@ -204,7 +204,7 @@ The results shown below use the following metrics:
 | CNN     | 99.99        | 99.72                  | 9014       | 14256          | 180290 |
 | DS-CNN  | 99.99        | 99.54                  | 5174       | 14320          | 101690 |
 | WDCNN   | 100          | 99.68                  | 4902       | 14144          | 116946 |
-| DNN     | 87.43        | 84.11                  | 9159       | 14128          | 19314  |
+| FFNN    | 87.43        | 84.11                  | 9159       | 14128          | 19314  |
 
 **Paderborn**
 | Network | accuracy (%) | converted accuracy (%) | parameters | model size (B) | FLOPs  |
@@ -212,7 +212,7 @@ The results shown below use the following metrics:
 | CNN     | 99.92        | 99.75                  | 8503       | 14000          | 402968 |
 | DS-CNN  | 99.89        | 99.12                  | 4527       | 13776          | 198672 |
 | WDCNN   | 99.62        | 98.13                  | 3309       | 12752          | 147112 |
-| DNN     | 69.26        | 68.05                  | 8431       | 13440          | 18896  |
+| FFNN    | 69.26        | 68.05                  | 8431       | 13440          | 18896  |
 
 ## License
 This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/. For licenses of the Case Western Reserve University and Paderborn University datasets please see the respective subfolders.
